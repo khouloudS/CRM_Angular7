@@ -1,0 +1,19 @@
+
+<form >
+  <div class="mb-4">
+    <mat-form-field class="w-100">
+      <input matInput type="email" placeholder="Email" [ngModel]="email"  [ngModelOptions]="{standalone: true}" required>
+    </mat-form-field>
+  </div>
+  <div class="mb-4">
+    <mat-form-field class="w-100">
+      <input matInput type="password" placeholder="Password" [ngModel]="token" [ngModelOptions]="{standalone: true}" required>
+    </mat-form-field>
+  </div>
+  <div class="mb-3">
+    <mat-checkbox>Remember Me</mat-checkbox>
+    <span fxFlex></span> <a [routerLink]="['/session/forgot-password']">Forgot Password?</a>
+  </div>
+  <button color="accent" (click)="login()" class="button-lg mb-3" mat-raised-button [routerLink]="['/checkout/payment']">Sign In</button>
+  <p>Don't have an account? <a [routerLink]="['/session/signup']">Click here to create one</a></p>
+<form>
