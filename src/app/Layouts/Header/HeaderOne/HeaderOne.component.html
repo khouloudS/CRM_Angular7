@@ -17,7 +17,7 @@
             <embryo-HeaderCart [currency]="embryoService?.currency" [cartProducts]="embryoService?.localStorageCartProducts" [count]="embryoService?.navbarCartCount" (removeProductData)="openConfirmationPopup($event)"></embryo-HeaderCart>
 
             <embryo-WishList [currency]="embryoService?.currency" [wishListProducts]="embryoService?.localStorageWishlist" [count]="embryoService?.navbarWishlistProdCount" (removeWishListData)="openWishlistConfirmationPopup($event)" (addAllWishlistToCart)="addAllWishlistToCart($event)" (addToCart)="addToCart($event)"></embryo-WishList>
-            
+            <button  *ngIf="item == 22" [routerLink]="['/account/dashbord-admin']">ADMIN</button>
             <embryo-HeaderUserProfileDropdown></embryo-HeaderUserProfileDropdown>
           </div>
         </div>
@@ -54,7 +54,7 @@
   <mat-toolbar-row class="responsive-bar relative">
       <div class="container">
         <div fxLayoutAlign="space-between">
-       
+
           <button class="responsive-toggle" mat-icon-button (click)="toggleSidebar()">
             <i class="material-icons">menu</i>
           </button>

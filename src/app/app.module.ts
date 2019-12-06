@@ -67,6 +67,8 @@ import { SideBarMenuComponent } from './Layouts/Menu/SidebarMenu/SidebarMenu.com
 import { PaymentDetailSideBarComponent } from './Layouts/PaymentDetailSideBar/PaymentDetailSideBar.component';
 import { FixedHeaderComponent } from './Layouts/Header/FixedHeader/FixedHeader.component';
 import {NgxQRCodeModule} from 'ngx-qrcode2';
+import {NgxPaginationModule} from 'ngx-pagination';
+
 
 
 /********** Custom option for ngx-translate ******/
@@ -135,6 +137,7 @@ export function createTranslateLoader(http: HttpClient) {
     ToastaModule.forRoot(),
     BidiModule,
     NgxQRCodeModule,
+    NgxPaginationModule,
     TranslateModule.forRoot({
        loader: {
           provide: TranslateLoader,

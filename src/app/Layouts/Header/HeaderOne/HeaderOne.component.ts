@@ -16,8 +16,11 @@ export class HeaderOneComponent implements OnInit {
    wishlistProducts : any;
 
    constructor(public embryoService: EmbryoService) {}
+  item : any;
 
    ngOnInit() {
+     this.item = JSON.parse(localStorage.getItem(this.embryoService.currentUser));
+
    }
 
    public toggleSearch() {
@@ -50,7 +53,7 @@ export class HeaderOneComponent implements OnInit {
 
    public addAllWishlistToCart(values:any) {
       this.embryoService.addAllWishListToCart(values);
-   } 
+   }
 
    public openWishlistConfirmationPopup(value:any) {
       let message = "Are you sure you want to add all products?";

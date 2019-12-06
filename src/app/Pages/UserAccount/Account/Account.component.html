@@ -16,26 +16,26 @@
         <div fxLayout="row wrap" class="col-gap">
           <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="20" fxFlex.lg="20" fxFlex.xl="20" class="user-nav-list">
             <mat-list role="list">
-              <mat-list-item role="listitem"> <a [routerLink]="['/account/order-history']" routerLinkActive="tab-active">
+              <mat-list-item role="listitem" *ngIf="item != 22"> <a [routerLink]="['/account/order-history']" routerLinkActive="tab-active">
                   <i class="material-icons">history</i>
                   <span>Historique</span> </a></mat-list-item>
               <mat-list-item role="listitem"> <a [routerLink]="['/account/profile']" routerLinkActive="tab-active">
                   <span><i class="material-icons">
                       account_circle
                     </i> Profile</span> </a></mat-list-item>
-              <mat-list-item role="listitem"> <a [routerLink]="['/account/address']" routerLinkActive="tab-active"><i
+              <mat-list-item role="listitem"  *ngIf="item != 22"> <a [routerLink]="['/account/address']" routerLinkActive="tab-active"><i
                     class="material-icons">
                     location_on
                   </i> <span>Addresses</span> </a></mat-list-item>
-              <mat-list-item role="listitem"> <a [routerLink]="['/account/cards']" routerLinkActive="tab-active"><i
+              <mat-list-item role="listitem"  *ngIf="item != 22"> <a [routerLink]="['/account/cards']" routerLinkActive="tab-active"><i
                     class="material-icons">
                     credit_card
                   </i> <span>Saved Cards</span> </a></mat-list-item>
-              <mat-list-item role="listitem"> <a [routerLink]="['/account/invoice-history']" routerLinkActive="tab-active"><i
+              <mat-list-item role="listitem"  *ngIf="item == 22"> <a [routerLink]="['/account/invoice-history']" routerLinkActive="tab-active"><i
                 class="material-icons">
                     invoice
               </i> <span> Mes factures</span> </a></mat-list-item>
-              <mat-list-item role="listitem"> <a [routerLink]="['/account/dashbord-admin']" routerLinkActive="tab-active"><i
+              <mat-list-item role="listitem"  *ngIf="item == 22"> <a [routerLink]="['/account/dashbord-admin']" routerLinkActive="tab-active"><i
                 class="material-icons">
                 invoice
               </i> <span>dashboard</span> </a></mat-list-item>

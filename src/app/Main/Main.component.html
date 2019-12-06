@@ -10,11 +10,14 @@
             </i>
           </a>
         </div>
-        <embryo-SidebarMenu *ngFor="let item of menuItems.getMainMenu()" [item]="item"></embryo-SidebarMenu>
+        <embryo-SidebarMenu *ngFor="let item of menuItems.getMainMenu()" [item]="item">
+
+        </embryo-SidebarMenu>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav class="em-sidebar" #paymentSidenav [(opened)]="embryoService.paymentSidenavOpen" position="end" mode="over" >
       <embryo-PaymentDetailSideBar></embryo-PaymentDetailSideBar>
+
     </mat-sidenav>
     <div class="rtl-layout"><a class="text-xl" href="javascript:void(0);" (click)="changeDirection()">RTL</a></div>
     <ngx-toasta></ngx-toasta>

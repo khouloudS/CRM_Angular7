@@ -10,7 +10,14 @@ export interface Menu {
 	icon?: string;
 	children?: Menu[];
 }
-
+const AdminRoot= [
+  {
+    state: 'account/profile',
+    name: 'User Profile',
+    type: 'link',
+    icon: 'arrow_right_alt',
+  }
+]
 const HeaderOneItems= [
   {
     state: 'home',
@@ -77,8 +84,8 @@ const HeaderOneItems= [
     ]
   },
 
-
-  /*{
+/*
+  {
     state:'products/accessories',
     name:"ACCESSORIES",
     type:"link",
@@ -448,6 +455,7 @@ const FooterOneItems= [
   }
 
 ]
+// let item = JSON.parse(localStorage.getItem(this.embryoService.currentUser));
 
 @Injectable()
 export class MenuItems {
@@ -457,6 +465,10 @@ export class MenuItems {
     */
    getMainMenu(): Menu[] {
       return HeaderOneItems;
+   }
+
+   getAdminMenu(): Menu[] {
+     return  AdminRoot;
    }
 
    /*

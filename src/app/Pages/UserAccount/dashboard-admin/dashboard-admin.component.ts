@@ -25,26 +25,21 @@ export class DashboardAdminComponent implements OnInit {
   nbTotalGeneratedTonInvoice: number;
   productList: any;
   allProducts: any;
-  productData: [
-    {
-      nom: string ;
-      nb: number;
-    }
-  ];
+  productData:  [];
   constructor(private  _quoteService: QuoteService, private db: AngularFireDatabase, public embryoService: EmbryoService) {
 
   }
   ngOnInit() {
     let cpt = 0 ;
 
-    this._quoteService.findProducts().subscribe(data => {
-      for (let i of this.productList = data) {
         this._quoteService.products().subscribe( res => {
             for (let  j of this.allProducts = res) {
-              if (i.id == j.id) {
-                cpt ++ ;
-              }
-              console.log(i.name + '=====>' + cpt);
+              this._quoteService.findProducts().subscribe(data => {
+                for (let i of this.productList = data) {
+               if (i.id == j.id )
+               {
+                 cpt ++;
+               }
             }
 
           }
@@ -52,10 +47,11 @@ export class DashboardAdminComponent implements OnInit {
       }
 
     });
+
     this._quoteService.getQuotesStatistics().subscribe(data => {
         for (let i of  this.quoteStatistics = data ) {
             this.nbTotal =  this.quoteStatistics[0]['totalQuote'];
-            console.log(this.nbTotal);
+           // console.log(this.nbTotal);
           this.nbTotalExpired =  this.quoteStatistics[0]['totalQuoteExpired'];
           this.nbTotalGeneratedTonInvoice =  this.quoteStatistics[0]['numberOfQuoteGeneratedToInvoice'];
 

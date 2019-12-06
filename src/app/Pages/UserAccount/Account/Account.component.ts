@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {EmbryoService} from '../../../Services/Embryo.service';
 
 @Component({
   selector: 'app-Account',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountComponent implements OnInit {
 
-  constructor() { }
+  constructor(public  embryoService : EmbryoService) { }
 
+  item : any;
   ngOnInit() {
+    this.item = JSON.parse(localStorage.getItem(this.embryoService.currentUser));
   }
 
 }

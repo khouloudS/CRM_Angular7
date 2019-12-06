@@ -9,8 +9,10 @@ import { EmbryoService } from '../../../Services/Embryo.service';
 export class FixedHeaderComponent implements OnInit {
 
   constructor(private embryoService : EmbryoService) { }
-
+item : any;
   ngOnInit() {
+    this.item = JSON.parse(localStorage.getItem(this.embryoService.currentUser));
+
   }
 
   public toggleSidebar()

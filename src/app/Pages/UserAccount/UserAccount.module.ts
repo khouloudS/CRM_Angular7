@@ -46,6 +46,7 @@ import {SlickCarouselModule} from 'ngx-slick-carousel';
 import { InvoiceHistoryComponent } from './invoice-history/invoice-history.component';
 import { HistoryDetailsQuoteAdminComponent } from './history-details-quote-admin/history-details-quote-admin.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.compo
     GlobalModule,
     TemplatesModule,
     NgAisHitsModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    NgxPaginationModule
   ],
   declarations: [
      AccountComponent,
@@ -91,7 +93,8 @@ import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.compo
      EditProfileComponent,
      CardsComponent,
      AddressComponent,
-     OrderHistoryComponent, QuoteHistoryComponent, InvoiceHistoryComponent, HistoryDetailsQuoteAdminComponent, DashboardAdminComponent
+     OrderHistoryComponent, QuoteHistoryComponent, InvoiceHistoryComponent, HistoryDetailsQuoteAdminComponent, DashboardAdminComponent,
+
    ]
 })
 export class UserAccountModule { }
