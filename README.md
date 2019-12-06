@@ -1,9 +1,15 @@
-# Embryo
+# CRM Project
 
-Online Documentation
-https://iron-network.gitbook.io/embryo/
-
-For quick help please send us your query at support@theironnetwork.org
+Development of a CRM for telephone impassers in Tunisia.
+Creating the Admin and Client interfaces
+Module development:
+- quote management
+- invoice receipt
+- basket management
+- Implementation of online payment using Stripe.
+- download quotes and invoices in PDF format
+- sending emails and alerts notifications
+- Statistics
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.0.
 
