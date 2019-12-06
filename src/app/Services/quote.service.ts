@@ -7,6 +7,8 @@ import {postProduct} from '../Model/Product';
 import {postInvoiceModel, respInvoiceModel} from '../Model/Invoice';
 import {postPayment, respPayment} from '../Model/Payment';
 import {postUserModel} from '../Model/User';
+import {QuoteStatistics} from '../Model/QuoteStatistics';
+import {ProductsModule} from '../Pages/Products/Products.module';
 
 @Injectable({
   providedIn: 'root'
@@ -25,12 +27,23 @@ export class QuoteService {
   urlNumberProduct = 'http://localhost:9080/CRM_PI-web/rest/quote/countNumberQuoteGeneratedToInvoice';
   urlLogin = 'http://localhost:9080/CRM_PI-web/rest/quote/login';
   urlLoginUser = 'http://localhost:9080/CRM_PI-web/rest/quote/loginClient';
+  urlfindProducts = 'http://localhost:9080/CRM_PI-web/rest/quote/findAllProduct';
+  urlProducts = 'http://localhost:9080/CRM_PI-web/rest/quote/Product';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
     })
   };
   constructor(private  http: HttpClient) { }
+  public  products(): Observable<postProduct[]> {
+    return this.http.get<postProduct[]>(this.urlProducts);
+  }
+  public  findProducts(): Observable<postProduct[]> {
+    return this.http.get<postProduct[]>(this.urlfindProducts);
+  }
+ public  getQuotesStatistics(): Observable<QuoteStatistics[]> {
+    return this.http.get<QuoteStatistics[]>(this.urlStatistics);
+  }
   public  getQuote(): Observable<postData[]> {
     return this.http.get<postData[]>(this.url);
   }

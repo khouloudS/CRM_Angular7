@@ -34,7 +34,8 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/slick-carousel/slick/slick.min.js"
+              "node_modules/slick-carousel/slick/slick.min.js",
+              "src/canvasjs.min.js"
             ]
           },
           "configurations": {
@@ -112,7 +113,7 @@
               "**/node_modules/**"
             ]
           }
-        }, 
+        },
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {

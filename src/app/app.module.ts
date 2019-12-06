@@ -142,8 +142,7 @@ export function createTranslateLoader(http: HttpClient) {
           deps: [HttpClient]
        }
     }),
-    SlickCarouselModule
-  ],
+    SlickCarouselModule],
    providers: [
       MenuItems,
       EmbryoService
