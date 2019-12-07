@@ -33,7 +33,7 @@ export class CommonSignInComponent implements OnInit {
     this._quoteService.loginCLient('khouloud.sellami@esprit.tn', 'azert').subscribe(data => this.listUser = data  );
     console.log(this.listUser);
     let key = this.embryoService.currentUser;
-    let myObj = 22;
+    let myObj = 2;
     localStorage.setItem(key, String(myObj) );
 
 // Read item:

@@ -5,11 +5,19 @@
 
       <div class="cart-shop-list mb-5 text-center  card-shadow">
         <div class="text-center bg-grey  ">
-          <h1>Merci pour votre confiance</h1>
-          <h5 class="mb-4">Votre devis</h5>
+          <h1>{{Prenom}} {{ Nom}}</h1>
+          <h5 class="mb-4">Devis</h5>
           <h6 class="mb-4">Référence: {{parentRouteParams}}</h6>
-          <img src="assets/images/checked.png" width="64" height="64" alt="Success">
-        </div>
+          <div *ngIf="generated == 1">
+            <img src="assets/images/checked.png" width="64" height="64" alt="Success">
+          </div>
+          <div *ngIf="generated == 0 && expired == true">
+           <img src="assets/images/croix.png" width="64" height="64" alt="Success">
+          </div>
+          <div *ngIf="generated == 0 && expired == false">
+            <img src="assets/images/chargement.png" width="64" height="64" alt="Success">
+          </div>
+      </div>
         <div fxLayout='row wrap' fxLayoutAlign="start center" class="cart-item" *ngFor="let product of embryoService.localStorageCartProducts">
 
 
@@ -31,7 +39,7 @@
               </div>
               <div fxFlex.xs="50" fxFlex.sm="20" fxFlex.md="20" fxFlex.lg="20" fxFlex.xl="20">
                 <mat-form-field class="w-100">
-                  <input  matInput type="number" #quantity [value]="getQuantityValue(product)" min="1" max="10" placeholder="Quantity">
+                  <input [disabled]="true" matInput type="number" #quantity [value]="getQuantityValue(product)" min="1" max="10" placeholder="Quantity">
                 </mat-form-field>
               </div>
               <div fxFlex.xs="50" fxFlex.sm="40" fxFlex.md="30" fxFlex.lg="20" fxFlex.xl="20">

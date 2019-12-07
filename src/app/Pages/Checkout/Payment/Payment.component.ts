@@ -84,7 +84,8 @@ export class PaymentComponent implements OnInit, AfterViewInit{
                private route: ActivatedRoute) {
 
       this.embryoService.removeBuyProducts();
-     this.randomString(10);
+
+    // console.log('reference invoice '+ this.invoiceReference);
    }
 
    ngOnInit() {
@@ -225,26 +226,29 @@ export class PaymentComponent implements OnInit, AfterViewInit{
 
    public  generateInvoice()
    {
+     this.randomString(10);
      this.postInvoice = new postInvoiceModel();
      this.postInvoice.reference = this.invoiceReference;
+
      this.postInvoice.total = this.total;
      this.dataService.addInvoice(this.parentRouteParams, this.postInvoice).subscribe((res: respInvoiceModel) => {
        this.resultData = res;
      });
 
    }
-  public doPayment()
+ /* public doPayment()
   {
-    console.log(this.invoiceReference);
-  this.postPayment = new postPayment();
-  this.postPayment.amount = this.total;
-  this.dataService.doPayment(this.invoiceReference, this.postPayment).subscribe((resp: respPayment ) => {
-    this.respPayment = resp;
-  });
-  }
+    // console.log(this.invoiceReference);
+    this.postPayment = new postPayment();
+    this.postPayment.amount = this.total;
+    this.dataService.doPayment(this.invoiceReference, this.postPayment).subscribe((resp: respPayment ) => {
+      this.respPayment = resp;
+    });
+
+  }*/
    public finalStep() {
      this.generateInvoice();
-     this.doPayment();
+     //  this.doPayment();
       let paymentGroup = <FormGroup>(this.paymentFormOne.controls['payment']);
       if(paymentGroup.valid) {
          this.embryoService.addBuyUserDetails(this.paymentFormOne.value);

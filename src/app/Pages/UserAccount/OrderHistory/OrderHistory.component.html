@@ -13,25 +13,25 @@
     <!-- id Column -->
     <ng-container matColumnDef="orderid">
       <th mat-header-cell *matHeaderCellDef> Reference </th>
-      <td mat-cell *matCellDef="let element"  [ngClass]="{'make-gold':element.expired}" > {{element.reference}} </td>
+      <td mat-cell *matCellDef="let element"  [ngClass]="{'make-gold':element.expired && element.generatedToInvoice == 0}" > {{element.reference}} </td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Date génération </th>
-      <td mat-cell *matCellDef="let element"  [ngClass]="{'make-gold':element.expired}" > {{element.dateQuote| date:'MMMM d, y'}}</td>
+      <td mat-cell *matCellDef="let element"  [ngClass]="{'make-gold':element.expired && element.generatedToInvoice == 0}" > {{element.dateQuote| date:'MMMM d, y'}}</td>
     </ng-container>
 
     <!-- price Column -->
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef> Durée </th>
-      <td mat-cell *matCellDef="let element"  [ngClass]="{'make-gold':element.expired}" >{{element.duration}} </td>
+      <td mat-cell *matCellDef="let element"  [ngClass]="{'make-gold':element.expired && element.generatedToInvoice == 0}" >{{element.duration}} </td>
     </ng-container>
 
     <!-- Status Column -->
     <ng-container matColumnDef="status">
          <th mat-header-cell *matHeaderCellDef> Exipiré </th>
-         <td mat-cell *matCellDef="let element" [ngClass]="{'make-gold':element.expired}">
+         <td mat-cell *matCellDef="let element" [ngClass]="{'make-gold':element.expired && element.generatedToInvoice == 0}">
 
            {{element.expired}}
 
@@ -41,7 +41,7 @@
 
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef>  Généré en facture</th>
-      <td mat-cell  *matCellDef="let element"  [ngClass]="{'make-gold':element.expired}" >
+      <td mat-cell  *matCellDef="let element"  [ngClass]="{'make-gold':element.expired && element.generatedToInvoice == 0}" >
         <span  *ngIf="element.generatedToInvoice == 1 " > {{genereted}}</span>
         <span *ngIf="element.generatedToInvoice == 0 "> {{nongenereted}}
 

@@ -5,29 +5,29 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule,
-         MatCardModule,
-         MatMenuModule,
-         MatToolbarModule,
-         MatIconModule,
-         MatInputModule,
-         MatDatepickerModule,
-         MatNativeDateModule,
-         MatProgressSpinnerModule,
-         MatTableModule,
-         MatExpansionModule,
-         MatSelectModule,
-         MatSnackBarModule,
-         MatTooltipModule,
-         MatChipsModule,
-         MatListModule,
-         MatSidenavModule,
-         MatTabsModule,
-         MatProgressBarModule,
-         MatCheckboxModule,
-         MatSliderModule,
-         MatRadioModule,
-         MatDialogModule,
-         MatGridListModule
+  MatCardModule,
+  MatMenuModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatProgressSpinnerModule,
+  MatTableModule,
+  MatExpansionModule,
+  MatSelectModule,
+  MatSnackBarModule,
+  MatTooltipModule,
+  MatChipsModule,
+  MatListModule,
+  MatSidenavModule,
+  MatTabsModule,
+  MatProgressBarModule,
+  MatCheckboxModule,
+  MatSliderModule,
+  MatRadioModule,
+  MatDialogModule,
+  MatGridListModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
@@ -73,7 +73,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 /********** Custom option for ngx-translate ******/
 export function createTranslateLoader(http: HttpClient) {
-   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
@@ -139,17 +139,17 @@ export function createTranslateLoader(http: HttpClient) {
     NgxQRCodeModule,
     NgxPaginationModule,
     TranslateModule.forRoot({
-       loader: {
-          provide: TranslateLoader,
-          useFactory: createTranslateLoader,
-          deps: [HttpClient]
-       }
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
     }),
     SlickCarouselModule],
-   providers: [
-      MenuItems,
-      EmbryoService
-   ],
-   bootstrap: [AppComponent]
+  providers: [
+    MenuItems,
+    EmbryoService
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

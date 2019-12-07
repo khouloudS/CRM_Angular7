@@ -7,10 +7,18 @@
 
       <div class="cart-shop-list mb-5 text-center  card-shadow">
         <div class="text-center bg-grey  ">
-          <h1>Merci pour votre confiance</h1>
+          <h1>Merci pour votre confiance {{Prenom}} {{Nom}}</h1>
           <h5 class="mb-4">Votre devis</h5>
           <h6 class="mb-4">Référence: {{parentRouteParams}}</h6>
-          <img src="assets/images/checked.png" width="64" height="64" alt="Success">
+          <div *ngIf="generated == 1">
+            <img src="assets/images/checked.png" width="64" height="64" alt="Success">
+          </div>
+          <div *ngIf="generated == 0 && expired == true">
+            <img src="assets/images/croix.png" width="64" height="64" alt="Success">
+          </div>
+          <div *ngIf="generated == 0 && expired == false">
+            <img src="assets/images/chargement.png" width="64" height="64" alt="Success">
+          </div>
         </div>
         <div fxLayout='row wrap' fxLayoutAlign="start center" class="cart-item" *ngFor="let product of embryoService.localStorageCartProducts">
 
@@ -66,7 +74,7 @@
 
                        <div *ngFor="let v of quote">
                          <span *ngIf="v.reference == parentRouteParams && v.generatedToInvoice == 0 && v.expired == false">
-                           <button mat-raised-button color="accent"  class="button-lg" (click)="updateLocalCartProduct()">Checkout</button>
+                           <button mat-raised-button color="accent"  class="button-lg" (click)="updateLocalCartProduct()">Payer</button>
                            </span>
                        </div>
 

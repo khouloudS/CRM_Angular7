@@ -43,9 +43,7 @@
       <th mat-header-cell *matHeaderCellDef>  Généré en facture</th>
       <td mat-cell *matCellDef="let element">
         <span *ngIf="element.generatedToInvoice == 1 "> {{genereted}}</span>
-        <span *ngIf="element.generatedToInvoice == 0 "> {{nongenereted}}
-
-        </span>
+        <span *ngIf="element.generatedToInvoice == 0 "> {{nongenereted}}</span>
       </td>
     </ng-container>
 

@@ -26,7 +26,20 @@ export class HistoryDetailsQuoteAdminComponent implements OnInit {
   quantityArray  : number[] = [1,2,3,4,5,6,7,8,9,10];
   popupResponse  : any;
 
-
+  listUser: any;
+  ID :number;
+  Adresse :string;
+  CIN:number;
+  DateBirth:string;
+  Email:string;
+  Nom: string;
+  Password: string;
+  Prenom: string;
+  Username: string;
+  Operateur: string;
+  idClient: number;
+  generated: number;
+  expired: boolean;
   constructor(private _quoteService: QuoteService, public embryoService: EmbryoService,
               public router: Router, private dataService: QuoteService,
               private route: ActivatedRoute,
@@ -43,25 +56,42 @@ export class HistoryDetailsQuoteAdminComponent implements OnInit {
   ngOnInit() {
     this.parentRouteParams = this.route.snapshot.paramMap.get('reference')
     console.log(this.parentRouteParams);
-    this._quoteService.getQuoteProduct(this.parentRouteParams).subscribe(data => console.log(this.quoteDetails = data) );
+    this._quoteService.getQuoteProduct(this.parentRouteParams).subscribe(data => {
+      for( let i of this.quoteDetails = data) {
+        this.idClient = this.quoteDetails[0]['idClient'];
+        this.generated = this.quoteDetails[0]['generated'];
+        this.expired = this.quoteDetails[0]['expired'];
+        this._quoteService.loginUser(this.idClient).subscribe(res => {
+          for (let i of this.listUser = res) {
+            console.log(this.listUser[0]['id']);
+            this.Email = this.listUser[0]['email'];
+            this.Nom = this.listUser[0]['nom'];
+            this.Prenom = this.listUser[0]['prenom'];
+            this.Adresse = this.listUser[0]['adresse'];
+            this.CIN = this.listUser[0]['cin'];
+          }
+
+        });
+    }
+    });
     let item = JSON.parse(localStorage.getItem(this.embryoService.currentUser));
-    this._quoteService.getQuoteByClient(item).subscribe(data => this.quote = data );
+    this._quoteService.getQuoteByClient(item).subscribe(data => this.quote = data);
 
     // this._quoteService.getProductByQuote(this.parentRouteParams).subscribe(data => console.log(this.productList = data) );
     this._quoteService.getProductByQuote(this.parentRouteParams).subscribe(data => {
-      for (let i of this.productList = data){
+      for (let i of this.productList = data) {
         // this._quoteService.findAllProductByQuoteAndNumber(i.id, this.parentRouteParams).subscribe(resp => console.log(this.quanti = resp) )
-        console.log(this.quanti );
-        this.db.object("products").valueChanges().subscribe(res =>  {
-          this.embryoService.setCartItemDefaultValue(res['gadgets'][i.id-10]);
-        } );
+        console.log(this.quanti);
+        this.db.object("products").valueChanges().subscribe(res => {
+          this.embryoService.setCartItemDefaultValue(res['gadgets'][i.id - 10]);
+        });
 
       }
     });
 
+
+
   }
-
-
 
   ngAfterViewChecked() : void {
     this.cdRef.detectChanges();

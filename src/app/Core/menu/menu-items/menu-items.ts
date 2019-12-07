@@ -45,7 +45,7 @@ const HeaderOneItems= [
      }
     ]*/
   },
-  {
+   {
     state: "",
     name : "SHOP",
     type: "sub",
@@ -230,7 +230,7 @@ const HeaderOneItems= [
       }
     ]
   },*/
-  {
+ /* {
   state: "pages",
   name: "PAGES",
   type: "sub",
@@ -277,7 +277,7 @@ const HeaderOneItems= [
          icon: 'arrow_right_alt',
        }
     ]
-},
+},*/
 {
     state:'session',
     name:"SESSION",

@@ -68,8 +68,7 @@ export class QuoteService {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
-    return this.http.post<postPayment>(
-      this.urlPayment + quoteRef, paye, this.httpOptions );
+    return this.http.post<postPayment>(this.urlPayment + quoteRef, paye, this.httpOptions );
   }
   postQuoteDetails(idProduct: number, idQuote: number, quantity: number, quoteDetails: postDataQuoteDetails){
     const httpOptions = {

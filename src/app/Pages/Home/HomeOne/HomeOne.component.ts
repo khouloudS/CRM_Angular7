@@ -11,6 +11,7 @@ import { EmbryoService } from '../../../Services/Embryo.service';
 })
 export class HomeoneComponent implements OnInit, AfterViewChecked{
 
+   item: any
    blogList              : any;
    productReviews        : any;
    productsArray         : any;
@@ -96,6 +97,8 @@ export class HomeoneComponent implements OnInit, AfterViewChecked{
    }
 
    ngOnInit() {
+     this.item = JSON.parse(localStorage.getItem(this.embryoService.currentUser));
+
    }
 
    ngAfterViewChecked() : void {
