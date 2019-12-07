@@ -47,6 +47,7 @@ import { InvoiceHistoryComponent } from './invoice-history/invoice-history.compo
 import { HistoryDetailsQuoteAdminComponent } from './history-details-quote-admin/history-details-quote-admin.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {GrdFilterPipe} from './grd-filter.pipe';
 
 
 @NgModule({
@@ -93,7 +94,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
      EditProfileComponent,
      CardsComponent,
      AddressComponent,
-     OrderHistoryComponent, QuoteHistoryComponent, InvoiceHistoryComponent, HistoryDetailsQuoteAdminComponent, DashboardAdminComponent,
+     OrderHistoryComponent, QuoteHistoryComponent, InvoiceHistoryComponent, HistoryDetailsQuoteAdminComponent, DashboardAdminComponent, GrdFilterPipe
 
    ]
 })

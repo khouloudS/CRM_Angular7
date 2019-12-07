@@ -12,7 +12,7 @@ import {FormBuilder} from '@angular/forms';
 })
 
 export class InvoiceHistoryComponent implements OnInit {
-
+  public searchText : string;
   deliveryDate: any;
   public quote :any;
   displayedColumns: string[] = [ 'orderid', 'name', 'price', 'status','position','action'];

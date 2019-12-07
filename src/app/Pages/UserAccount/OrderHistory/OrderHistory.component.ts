@@ -20,6 +20,9 @@ const order_history = [
   styleUrls: ['./OrderHistory.component.scss']
 })
 export class OrderHistoryComponent implements OnInit {
+  p = 1;
+  px = 6;
+  public searchText : string;
   deliveryDate: any;
   public quote :any;
    displayedColumns: string[] = [ 'orderid', 'name', 'price', 'status','position','action'];
