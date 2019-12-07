@@ -17,7 +17,7 @@ export class DashboardAdminComponent implements OnInit {
     y: number;
     name: string;
   }];
-  listIdProduct = [];
+  listIdProduct : any;
   genereted = 'généré';
   nongenereted = 'non généré';
   nbTotal : number;
@@ -25,28 +25,63 @@ export class DashboardAdminComponent implements OnInit {
   nbTotalGeneratedTonInvoice: number;
   productList: any;
   allProducts: any;
-  productData:  [];
+  productTotalData: number;
+
+  productData: Object[] = [];
   constructor(private  _quoteService: QuoteService, private db: AngularFireDatabase, public embryoService: EmbryoService) {
 
   }
   ngOnInit() {
-    let cpt = 0 ;
 
+    let nomb = 0;
         this._quoteService.products().subscribe( res => {
             for (let  j of this.allProducts = res) {
+              let cpt = 0 ;
               this._quoteService.findProducts().subscribe(data => {
                 for (let i of this.productList = data) {
-               if (i.id == j.id )
-               {
-                 cpt ++;
-               }
-            }
+                 if (j.id === i.id){
+                   cpt++;
+                 }
 
+                }
+             this.productData.push({
+               y : cpt,
+               label : j.name
+             });
+                console.log(this.productData);
+
+
+                console.log(j.id+ ' count is ' + cpt);
+
+                let chart = new CanvasJS.Chart("chartLineContainer", {
+                  animationEnabled: true,
+
+                  title:{
+                    text:"Comparaison d'achat des produits"
+                  },
+                  axisX:{
+                    interval: 1
+                  },
+                  axisY2:{
+                    interlacedColor: "rgba(1,77,101,.2)",
+                    gridColor: "rgba(1,77,101,.1)",
+                    title: "Nombre de produit"
+                  },
+                  data: [{
+                    type: "bar",
+                    name: "companies",
+                    axisYType: "secondary",
+                    color: "#014D65",
+                    dataPoints: this.productData
+                  }]
+                });
+                chart.render();
+
+              });
           }
-        );
-      }
+      });
 
-    });
+
 
     this._quoteService.getQuotesStatistics().subscribe(data => {
         for (let i of  this.quoteStatistics = data ) {
