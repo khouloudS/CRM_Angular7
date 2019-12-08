@@ -4,7 +4,7 @@ export class postInvoiceModel{
   description: string;
   duration: number;
   dateInvoice: string;
-  total : number;
+  total: number;
   status: string;
 }
 
@@ -13,8 +13,8 @@ export interface respInvoiceModel {
   description: string;
   duration: number;
   dateInvoice: string;
-  total : number;
+  total: number;
   status: string;
-  id : number;
+  id: number;
 }
 

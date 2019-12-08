@@ -29,6 +29,7 @@ export class QuoteService {
   urlLoginUser = 'http://localhost:9080/CRM_PI-web/rest/quote/loginClient';
   urlfindProducts = 'http://localhost:9080/CRM_PI-web/rest/quote/findAllProduct';
   urlProducts = 'http://localhost:9080/CRM_PI-web/rest/quote/Product';
+  urlAddInvoiceWithoutQuote = 'http://localhost:9080/CRM_PI-web/rest/invoice/addInvoice';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
@@ -64,6 +65,15 @@ export class QuoteService {
     return this.http.post<postInvoiceModel>(
       this.urlPostInvoice + quoteRef, postInvoice, this.httpOptions );
   }
+
+  addInvoiceWithoutQuote (postInvoice: postInvoiceModel){
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.http.post<postInvoiceModel>(
+      this.urlAddInvoiceWithoutQuote, postInvoice, this.httpOptions );
+  }
+
   doPayment (quoteRef: string, paye: postPayment){
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})

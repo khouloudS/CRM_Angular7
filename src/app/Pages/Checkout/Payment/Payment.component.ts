@@ -248,6 +248,29 @@ export class PaymentComponent implements OnInit, AfterViewInit{
   }*/
    public finalStep() {
      this.generateInvoice();
+     console.log(this.getCartProducts());
+     if(this.parentRouteParams == null) {
+       let total = 0;
+       if (this.embryoService.localStorageCartProducts && this.embryoService.localStorageCartProducts.length > 0) {
+         for (let product of this.embryoService.localStorageCartProducts) {
+           if (!product.quantity) {
+             product.quantity = 1;
+           }
+           total += (product.price * product.quantity);
+         }
+         total += (this.embryoService.shipping + this.embryoService.tax);
+       }
+
+
+       this.randomString(10);
+       this.postInvoice = new postInvoiceModel();
+       this.postInvoice.reference = this.invoiceReference;
+       this.postInvoice.total = total;
+       this.dataService.addInvoiceWithoutQuote(this.postInvoice).subscribe((res: respInvoiceModel) => {
+         this.resultData = res;
+       });
+     }
+
      //  this.doPayment();
       let paymentGroup = <FormGroup>(this.paymentFormOne.controls['payment']);
       if(paymentGroup.valid) {
