@@ -1,38 +1,35 @@
-<mat-card *ngIf="type == 'info'">
-  <h4> Modifier vos informations</h4>
+<mat-card >
+  <h4> Ajouter coupon</h4>
   <div fxLayout="row wrap" class="col-gap">
     <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="50">
-      <form [formGroup] = "info">
+      <form [formGroup] = "info" (ngSubmit)="submitProfileInfo()">
         <div class="example-container">
           <mat-form-field class="w-100 mb-3">
-            <input matInput placeholder="First Name" formControlName="first_name"  [value]="Prenom">
-            <mat-error *ngIf="info.get('first_name').hasError('required') && info.get('first_name').touched">Ce chamaps ne doit pas etre vide.</mat-error>
+            <input matInput placeholder="Reference" formControlName="ref"  >
+            <mat-error *ngIf="info.get('ref').hasError('required') && info.get('ref').touched">Ce chamaps ne doit pas etre vide.</mat-error>
           </mat-form-field>
           <mat-form-field class="w-100 mb-3">
-            <input matInput placeholder="Last Name" formControlName="last_name" [value]="Nom">
-            <mat-error *ngIf="info.get('last_name').hasError('required') && info.get('last_name').touched">Ce chamaps ne doit pas etre vide.</mat-error>
+            <input matInput placeholder="Promotion" formControlName="reduction"  >
+            <mat-error *ngIf="info.get('reduction').hasError('required') && info.get('reduction').touched">Ce chamaps ne doit pas etre vide.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-100 mb-3">
+            <input matInput placeholder="Condition" formControlName="seuil" >
+            <mat-error *ngIf="info.get('seuil').hasError('required') && info.get('seuil').touched">Ce chamaps ne doit pas etre vide.</mat-error>
           </mat-form-field>
 
           <div>
             <mat-form-field class="w-100 mb-3">
-              <input matInput [matDatepicker]="picker" placeholder="Bith Date" formControlName="date"  [value]="birth">
+              <input matInput [matDatepicker]="picker" placeholder="Date debut" formControlName="dateDebute">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
-              <mat-error *ngIf="info.get('date').hasError('required') && info.get('date').touched">Ce chamaps ne doit pas etre vide.</mat-error>
+              <mat-error *ngIf="info.get('dateDebute').hasError('required') && info.get('dateDebute').touched">Ce chamaps ne doit pas etre vide.</mat-error>
             </mat-form-field>
           </div>
 
-          <mat-form-field class="w-100 mb-3">
-            <input matInput placeholder="Location" formControlName="location"  [value]="Adresse">
-            <mat-error *ngIf="info.get('location').hasError('required') && info.get('location').touched">Ce chamaps ne doit pas etre vide.</mat-error>
-          </mat-form-field>
 
-          <mat-form-field class="w-100 mb-3">
-            <input matInput type="email" placeholder="Email" formControlName="email"  [value]="Email">
-            <mat-error *ngIf="info.get('email').hasError('required') && info.get('email').touched">Ce chamaps ne doit pas etre vide.</mat-error>
-            <mat-error *ngIf="info.get('email').hasError('pattern') && info.get('email').touched">S'il vous plait entrez un email valide.</mat-error>
-          </mat-form-field>
-          <button mat-raised-button color="accent" (click)="submitProfileInfo()">Enregistrer</button>
+
+          <button mat-raised-button color="accent" type="submit">Enregistrer</button>
         </div>
       </form>
     </div>

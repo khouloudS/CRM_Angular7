@@ -24,14 +24,15 @@ export class FinalReceiptComponent implements OnInit {
    products     : any;
    userDetails  : any;
    todayDate    : any = new Date();
-
+  totalFacture : any;
    constructor(public embryoService: EmbryoService, public router: Router,
                private dataService: QuoteService,
                private route: ActivatedRoute) {
+     this.totalFacture = JSON.parse(localStorage.getItem(this.embryoService.totalInvoice));
      this.parentRouteParams = this.route.snapshot.paramMap.get('reference');
       this.getDeliveryDate();
       this.userDetails = JSON.parse(localStorage.getItem("user"));
-     this.value = 'Cette facture de référence ' + this.parentRouteParams + ' est payée d un montant ' + this.getTotalPrice() +'$';
+     this.value = 'Cette facture de référence ' + this.parentRouteParams + ' est payée d un montant ' + this.totalFacture +'$';
      this.display = true;
    }
 

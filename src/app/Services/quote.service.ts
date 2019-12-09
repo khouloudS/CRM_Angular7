@@ -9,6 +9,7 @@ import {postPayment, respPayment} from '../Model/Payment';
 import {postUserModel} from '../Model/User';
 import {QuoteStatistics} from '../Model/QuoteStatistics';
 import {ProductsModule} from '../Pages/Products/Products.module';
+import {postCoupon} from '../Model/Coupon';
 
 @Injectable({
   providedIn: 'root'
@@ -30,12 +31,23 @@ export class QuoteService {
   urlfindProducts = 'http://localhost:9080/CRM_PI-web/rest/quote/findAllProduct';
   urlProducts = 'http://localhost:9080/CRM_PI-web/rest/quote/Product';
   urlAddInvoiceWithoutQuote = 'http://localhost:9080/CRM_PI-web/rest/invoice/addInvoice';
+  urlAddCoupon = 'http://localhost:9080/CRM_PI-web/rest/quote/addCoupon';
+  urlGetCoupon = 'http://localhost:9080/CRM_PI-web/rest/quote/getCoupon';
+  urlGetAllCoupon = 'http://localhost:9080/CRM_PI-web/rest/quote/getCoupon';
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
     })
   };
   constructor(private  http: HttpClient) { }
+  public  addCoupon(postCoup: postCoupon){
+    const httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  }
+  return this.http.post<postCoupon>(
+    this.urlAddCoupon, postCoup, this.httpOptions );
+}
   public  products(): Observable<postProduct[]> {
     return this.http.get<postProduct[]>(this.urlProducts);
   }
@@ -151,4 +163,21 @@ export class QuoteService {
     });
   }
 
+  public  getCoupon(coupon: string): Observable<postCoupon[]> {
+    let httpHeaders = new HttpHeaders()
+      .set('Accept', 'application/json');
+    return this.http.get<postCoupon[]>(this.urlGetCoupon + '/' + coupon , {
+      headers: httpHeaders,
+      responseType: 'json'
+    });
+  }
+
+  public  getAllCoupon(): Observable<postCoupon[]> {
+    let httpHeaders = new HttpHeaders()
+      .set('Accept', 'application/json');
+    return this.http.get<postCoupon[]>(this.urlGetAllCoupon, {
+      headers: httpHeaders,
+      responseType: 'json'
+    });
+  }
 }

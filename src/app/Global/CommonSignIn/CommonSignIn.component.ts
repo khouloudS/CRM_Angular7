@@ -4,6 +4,7 @@ import {QuoteService} from '../../Services/quote.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoadingBarService} from '@ngx-loading-bar/core';
 import {AngularFireDatabase} from '@angular/fire/database';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'embryo-SignIn',
@@ -14,12 +15,30 @@ export class CommonSignInComponent implements OnInit {
   listUser : any;
   token: string;
   email: string;
+  info         : FormGroup;
+  ID :number;
+  Adresse :string;
+  CIN:number;
+  DateBirth:string;
+  Email:string;
+  Nom: string;
+  Password: string;
+  Prenom: string;
+  Username: string;
+  Operateur: string;
+  birth: string;
   constructor(private _quoteService: QuoteService, public embryoService: EmbryoService,
               public router: Router, private dataService: QuoteService,
               private route: ActivatedRoute,
               private loadingBar: LoadingBarService,
               private cdRef : ChangeDetectorRef,
-              private db: AngularFireDatabase,) { }
+              private db: AngularFireDatabase,) {
+
+    this.info = new FormGroup({
+      email   : new FormControl(''),
+      token    : new FormControl('')
+    });
+  }
 
   ngOnInit() {
 
@@ -29,12 +48,22 @@ export class CommonSignInComponent implements OnInit {
 // Read item:
     console.log(this.email);
 
-    //
-    this._quoteService.loginCLient('khouloud.sellami@esprit.tn', 'azert').subscribe(data => this.listUser = data  );
-    console.log(this.listUser);
     let key = this.embryoService.currentUser;
-    let myObj = 22;
-    localStorage.setItem(key, String(myObj) );
+   let myObj = 0;
+console.log(this.info.get('token').value);
+    //
+    this._quoteService.loginCLient(this.info.get('email').value, this.info.get('token').value).subscribe(data =>
+      {
+        for (let v of this.listUser = data){
+          console.log(this.listUser[0]['id']);
+          localStorage.setItem(key, String(this.listUser[0]['id']));
+        }
+      }
+    );
+    this.router.navigate(['/home']);
+
+//    localStorage.setItem(key, String(this.listUser[0]['id']) );
+    console.log(this.listUser);
 
 // Read item:
   //  let item = JSON.parse(localStorage.getItem(key));

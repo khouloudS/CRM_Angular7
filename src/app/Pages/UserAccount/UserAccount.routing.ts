@@ -10,6 +10,8 @@ import {QuoteHistoryComponent} from './quote-history/quote-history.component';
 import {InvoiceHistoryComponent} from './invoice-history/invoice-history.component';
 import {HistoryDetailsQuoteAdminComponent} from './history-details-quote-admin/history-details-quote-admin.component';
 import {DashboardAdminComponent} from './dashboard-admin/dashboard-admin.component';
+import {CouponAdminComponent} from './coupon-admin/coupon-admin.component';
+import {ShowAllCouponAdminComponent} from './show-all-coupon-admin/show-all-coupon-admin.component';
 
 export const UserAccountRoutes : Routes = [
    {
@@ -51,6 +53,14 @@ export const UserAccountRoutes : Routes = [
         {
           path: 'dashbord-admin',
           component: DashboardAdminComponent
+        },
+        {
+          path: 'coupon-admin',
+          component: CouponAdminComponent
+        },
+        {
+          path: 'show-all-coupon-admin',
+          component: ShowAllCouponAdminComponent
         }
       ]
    }

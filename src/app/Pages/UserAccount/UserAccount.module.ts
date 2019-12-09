@@ -48,6 +48,8 @@ import { HistoryDetailsQuoteAdminComponent } from './history-details-quote-admin
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {GrdFilterPipe} from './grd-filter.pipe';
+import { CouponAdminComponent } from './coupon-admin/coupon-admin.component';
+import { ShowAllCouponAdminComponent } from './show-all-coupon-admin/show-all-coupon-admin.component';
 
 
 @NgModule({
@@ -94,7 +96,7 @@ import {GrdFilterPipe} from './grd-filter.pipe';
      EditProfileComponent,
      CardsComponent,
      AddressComponent,
-     OrderHistoryComponent, QuoteHistoryComponent, InvoiceHistoryComponent, HistoryDetailsQuoteAdminComponent, DashboardAdminComponent, GrdFilterPipe
+     OrderHistoryComponent, QuoteHistoryComponent, InvoiceHistoryComponent, HistoryDetailsQuoteAdminComponent, DashboardAdminComponent, GrdFilterPipe, CouponAdminComponent, ShowAllCouponAdminComponent
 
    ]
 })

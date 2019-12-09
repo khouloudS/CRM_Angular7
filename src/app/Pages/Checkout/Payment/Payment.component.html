@@ -131,12 +131,22 @@
                     <div fxLayout='row wrap' fxLayoutAlign="center center">
                       <div fxLayout.xs="100" fxLayout.sm="100" fxLayout.md="50" fxLayout.lg="50" fxLayout.xl="50">
                         <div fxLayoutAlign="start center" formGroupName="offers">
+
+                          <div *ngIf="find == false" class="mr-2">{{totalWithoutCoupon}}</div>
+                          <del *ngIf="find == true" class="mr-2">{{totalWithoutCoupon}}></del>
                           <mat-form-field class="w-100">
                             <input matInput type="text" formControlName="discount_code" placeholder="Enter Code">
                           </mat-form-field>
                           <button mat-icon-button type="button" (click)="submitPayment()">
                             <i class="material-icons">send</i>
                           </button>
+                          <div *ngIf="find == true">
+                            coupon valide
+                            <span class="accent-color">Seulement {{totalFacture}}</span>
+                          </div>
+                          <div *ngIf="find == false">
+                            coupon n'est pas valide
+                          </div>
                         </div>
                       </div>
                     </div>

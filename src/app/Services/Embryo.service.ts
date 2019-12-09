@@ -30,13 +30,13 @@ export class EmbryoService {
    tax       : number = 27.95;
    idProduct : number ;
    products  : AngularFireObject<any>;
-   currentUser: any;
+   currentUser = 'currentUser';
    localStorageCartProducts : any;
    localStorageWishlist : any;
    navbarCartCount : number = 0;
    navbarWishlistProdCount = 0;
    buyUserCartProducts : any;
-
+   totalInvoice = 'totalInvoice' ;
    constructor(private http:HttpClient,
                private dialog: MatDialog,
                private db: AngularFireDatabase,

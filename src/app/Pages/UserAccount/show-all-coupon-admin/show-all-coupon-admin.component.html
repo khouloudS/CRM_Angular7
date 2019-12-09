@@ -1,0 +1,32 @@
+<mat-card>
+  <h4 class="mb-3">Mes Coupons</h4>
+  <button mat-raised-button color="accent" [routerLink]="['/account/coupon-admin']">Ajouter coupon</button>
+  <input [(ngModel)]="searchText" placeholder="chercher reference" class="advancedSearchTextbox">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Reference</th>
+      <th scope="col">Date debut</th>
+      <th scope="col">Date fin</th>
+      <th scope="col">pourcentage promotion</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let element of quote | grdFilter: {ref: searchText}; let i=index;">
+    <tr>
+      <th scope="row">1</th>
+      <td  > {{element.ref}} </td>
+      <td  > {{element.dateDebute| date:'MMMM d, y'}}</td>
+      <td  > {{element.dateFin| date:'MMMM d, y'}}</td>
+
+      <td  >{{element.reduction}} </td>
+      <td> <a href="javascript:void" class="accent-color"  [routerLink]="['/account/quote-history', element.reference]">   <i class="material-icons">
+        remove_red_eye
+      </i></a>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+</mat-card>

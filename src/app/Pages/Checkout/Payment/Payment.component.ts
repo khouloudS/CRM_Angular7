@@ -18,7 +18,6 @@ export class PaymentComponent implements OnInit, AfterViewInit{
   resultData: respInvoiceModel;
   postPayment: postPayment;
   respPayment: respPayment;
-  total: number;
   invoiceReference : string;
    step = 0;
    isDisabledPaymentStepTwo  = true;
@@ -76,12 +75,30 @@ export class PaymentComponent implements OnInit, AfterViewInit{
    ]
 
    paymentFormOne   : FormGroup;
-
+  listUser: any;
+  ID :number;
+  Adresse :string;
+  CIN:number;
+  DateBirth:string;
+  Email:string;
+  Nom: string;
+  Password: string;
+  Prenom: string;
+  Username: string;
+  Operateur: string;
+  birth: string;
+  coupnList : any;
+  allCouponList : any;
+  message : any;
+  totalFacture  = 0 ;
+  totalWithoutCoupon = 0;
+  find  : boolean;
    constructor(public embryoService : EmbryoService,
                private formGroup : FormBuilder,
                public router: Router,
                private dataService: QuoteService,
-               private route: ActivatedRoute) {
+               private route: ActivatedRoute,
+               public  _quoteService: QuoteService) {
 
       this.embryoService.removeBuyProducts();
 
@@ -89,6 +106,20 @@ export class PaymentComponent implements OnInit, AfterViewInit{
    }
 
    ngOnInit() {
+     let item = JSON.parse(localStorage.getItem(this.embryoService.currentUser));
+
+     this._quoteService.loginUser(item).subscribe(data => {
+       for(let i of this.listUser = data) {
+         console.log(this.listUser[0]['id']);
+         this.Email = this.listUser[0]['email'];
+         this.Nom = this.listUser[0]['nom'];
+         this.Prenom = this.listUser[0]['prenom'];
+         this.Adresse = this.listUser[0]['adresse'];
+         this.CIN = this.listUser[0]['cin'];
+         this.birth = this.listUser[0]['dateBirth'];
+         console.log( this.Prenom );
+       }});
+
      this.parentRouteParams = this.route.snapshot.paramMap.get('reference');
       this.paymentFormOne = this.formGroup.group({
          user_details       : this.formGroup.group({
@@ -104,7 +135,7 @@ export class PaymentComponent implements OnInit, AfterViewInit{
             share_email        : ['', [Validators.pattern(this.emailPattern)]],
          }),
          offers             : this.formGroup.group({
-            discount_code   : [''],
+            discount_code   :  new FormControl(''),
             card_type       : [1],
             card_type_offer_name  : [null]
          }),
@@ -117,6 +148,10 @@ export class PaymentComponent implements OnInit, AfterViewInit{
             bank_card_value : [null]
          })
       });
+
+      this.totalFacture =  this.getCartProducts();
+     this.totalWithoutCoupon =  this.getCartProducts();
+      console.warn('somme initial ' + this.totalFacture);
    }
 
    ngAfterViewInit() {
@@ -143,22 +178,52 @@ export class PaymentComponent implements OnInit, AfterViewInit{
    }
 
    public getCartProducts() {
-
+  let total = 0 ;
       if(this.embryoService.localStorageCartProducts && this.embryoService.localStorageCartProducts.length>0) {
          for(let product of this.embryoService.localStorageCartProducts) {
             if(!product.quantity){
                product.quantity = 1;
             }
-            this.total += (product.price*product.quantity);
+            total += (product.price*product.quantity);
          }
-         this.total += (this.embryoService.shipping+this.embryoService.tax);
-         return this.total;
+         total += (this.embryoService.shipping+this.embryoService.tax);
+         return total;
       }
-      return this.total;
+      return total;
    }
 
    public submitPayment() {
       let userDetailsGroup = <FormGroup>(this.paymentFormOne.controls['user_details']);
+      let userCouponGrroup = <FormGroup>(this.paymentFormOne.controls['offers']);
+        let code =   userCouponGrroup.get('discount_code').value;
+        console.warn(code);
+   let sysDate = new Date();
+    let total = 0 ;
+     this._quoteService.getAllCoupon().subscribe(data => {
+       for(let v of this.coupnList = data){
+        if (v.ref == code)
+        {
+          this.find = true;
+          if(this.embryoService.localStorageCartProducts && this.embryoService.localStorageCartProducts.length>0) {
+            for (let product of this.embryoService.localStorageCartProducts) {
+              if (!product.quantity) {
+                product.quantity = 1;
+              }
+              total += (product.price * product.quantity);
+            }
+            total += (this.embryoService.shipping + this.embryoService.tax);
+          }
+          this.totalFacture = total - v.reduction / 100 * total;
+          console.log(this.totalFacture);
+        }
+        else {
+          this.find = false;
+
+        }
+
+         console.log(this.find);
+       }
+     });
       if(userDetailsGroup.valid)
       {
          switch (this.step) {
@@ -226,11 +291,26 @@ export class PaymentComponent implements OnInit, AfterViewInit{
 
    public  generateInvoice()
    {
+     let total = 0;
+     if (this.embryoService.localStorageCartProducts && this.embryoService.localStorageCartProducts.length > 0) {
+       for (let product of this.embryoService.localStorageCartProducts) {
+         if (!product.quantity) {
+           product.quantity = 1;
+         }
+         total += (product.price * product.quantity);
+       }
+       total += (this.embryoService.shipping + this.embryoService.tax);
+     }
      this.randomString(10);
      this.postInvoice = new postInvoiceModel();
      this.postInvoice.reference = this.invoiceReference;
+ if(this.find === true){
+   this.postInvoice.total = this.totalFacture;
 
-     this.postInvoice.total = this.total;
+ }else if(this.find == false)
+     {
+       this.postInvoice.total = total;
+     }
      this.dataService.addInvoice(this.parentRouteParams, this.postInvoice).subscribe((res: respInvoiceModel) => {
        this.resultData = res;
      });
@@ -247,6 +327,11 @@ export class PaymentComponent implements OnInit, AfterViewInit{
 
   }*/
    public finalStep() {
+     console.log('find final' + this.find);
+     console.log('find finalTotalwith ' + this.totalWithoutCoupon);
+     console.log('find final facture ' + this.totalFacture);
+
+
      this.generateInvoice();
      console.log(this.getCartProducts());
      if(this.parentRouteParams == null) {
@@ -265,15 +350,30 @@ export class PaymentComponent implements OnInit, AfterViewInit{
        this.randomString(10);
        this.postInvoice = new postInvoiceModel();
        this.postInvoice.reference = this.invoiceReference;
-       this.postInvoice.total = total;
+       if(this.find == true){
+         this.postInvoice.total = this.totalFacture;
+
+       }else if(this.find == false)
+       {
+         this.postInvoice.total = total;
+       }
        this.dataService.addInvoiceWithoutQuote(this.postInvoice).subscribe((res: respInvoiceModel) => {
          this.resultData = res;
        });
      }
+     let key = this.embryoService.totalInvoice;
+     // let myObj = -1;
 
      //  this.doPayment();
       let paymentGroup = <FormGroup>(this.paymentFormOne.controls['payment']);
       if(paymentGroup.valid) {
+        if(this.find == true){
+          localStorage.setItem(key, String(this.totalFacture));
+
+        }else if(this.find == false)
+        {
+          localStorage.setItem(key, String(this.totalWithoutCoupon));
+        }
          this.embryoService.addBuyUserDetails(this.paymentFormOne.value);
          this.router.navigate(['/checkout/final-receipt', this.invoiceReference]);
 

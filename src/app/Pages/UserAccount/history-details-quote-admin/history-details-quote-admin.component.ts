@@ -80,6 +80,7 @@ export class HistoryDetailsQuoteAdminComponent implements OnInit {
     // this._quoteService.getProductByQuote(this.parentRouteParams).subscribe(data => console.log(this.productList = data) );
     this._quoteService.getProductByQuote(this.parentRouteParams).subscribe(data => {
       for (let i of this.productList = data) {
+
         // this._quoteService.findAllProductByQuoteAndNumber(i.id, this.parentRouteParams).subscribe(resp => console.log(this.quanti = resp) )
         console.log(this.quanti);
         this.db.object("products").valueChanges().subscribe(res => {

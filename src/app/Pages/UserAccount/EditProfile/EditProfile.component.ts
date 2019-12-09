@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params }   from '@angular/router';
 import { FormControl, FormGroup, FormBuilder,FormArray, Validators } from '@angular/forms';
 import { ToastaService, ToastaConfig, ToastOptions, ToastData} from 'ngx-toasta';
+import {EmbryoService} from '../../../Services/Embryo.service';
+import {QuoteService} from '../../../Services/quote.service';
 
 @Component({
   selector: 'app-EditProfile',
@@ -22,28 +24,54 @@ export class EditProfileComponent implements OnInit {
       timeout   : 3000,
       theme     : "material"
    };
-
+  listUser: any;
+  ID :number;
+  Adresse :string;
+  CIN:number;
+  DateBirth:string;
+  Email:string;
+  Nom: string;
+  Password: string;
+  Prenom: string;
+  Username: string;
+  Operateur: string;
+  birth: string;
    constructor(private route: ActivatedRoute,
                private router: Router,
                private formGroup : FormBuilder,
-               private toastyService: ToastaService) {
+               private toastyService: ToastaService,
+               public embryoService : EmbryoService, public  _quoteService: QuoteService) {
 
       this.route.params.subscribe(params => {
          this.route.queryParams.forEach(queryParams => {
             this.type = queryParams['type'];
-         });   
+         });
       });
+     let item = JSON.parse(localStorage.getItem(this.embryoService.currentUser));
+
+     this._quoteService.loginUser(item).subscribe(data => {
+       for(let i of this.listUser = data) {
+         console.log(this.listUser[0]['id']);
+         this.Email = this.listUser[0]['email'];
+         this.Nom = this.listUser[0]['nom'];
+         this.Prenom = this.listUser[0]['prenom'];
+         this.Adresse = this.listUser[0]['adresse'];
+         this.CIN = this.listUser[0]['cin'];
+         this.birth = this.listUser[0]['dateBirth'];
+         console.log( this.Prenom );
+       }});
    }
 
    ngOnInit() {
+
       this.info = this.formGroup.group({
-         first_name   : ['', [Validators.required]],
-         last_name    : ['', [Validators.required]],
+         first_name   : [ this.Prenom, [Validators.required]],
+         last_name    : [this.Nom, [Validators.required]],
          gender       : ['male'],
-         date         : [],
+         date         : [ this.birth],
          phone_number : ['', [Validators.required]],
-         location     : [''],
-         email        : ['', [Validators.required, Validators.pattern(this.emailPattern)]]
+         location     : [ this.Adresse],
+         email        : [ this.Email, [Validators.required, Validators.pattern(this.emailPattern)]]
       });
 
       this.address = this.formGroup.group({
@@ -61,7 +89,8 @@ export class EditProfileComponent implements OnInit {
          name        : ['', [Validators.required]],
          month       : ['', [Validators.required]],
          year        : ['', [Validators.required]]
-      })
+      });
+
    }
 
    /**

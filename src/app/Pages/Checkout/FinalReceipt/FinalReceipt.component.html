@@ -20,7 +20,7 @@
                   <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="50">
                     <h6>Détails</h6>
                     <p class="mb-1">Order Date: {{todayDate | date:'MMMM d, y'}} </p>
-                    <p class="mb-1">Order Total: {{getTotalPrice() | currency:embryoService?.currency}}</p>
+                    <p class="mb-1">Order Total: {{totalFacture | currency:embryoService?.currency}}</p>
 
                     <ngx-qrcode *ngIf="display" id="qrCodeImage" [qrc-element-type]="elementType" [qrc-value] = "value">
                     </ngx-qrcode><br>
@@ -72,7 +72,16 @@
                   <hr class="spacer">
                   <div class="mb-4">
                     <h4>Total</h4><span fxFlex></span>
-                    <h4> {{getTotalPrice() | currency:embryoService?.currency}}</h4>
+                    <h4>
+
+                      <span *ngIf="getTotalPrice() == totalFacture">{{getTotalPrice() | currency:embryoService?.currency}}</span><br/>
+                      <span *ngIf="getTotalPrice() != totalFacture">
+                        <del  class="mr-2">{{getTotalPrice() | currency:embryoService?.currency}}</del>
+                        {{totalFacture | currency:embryoService?.currency}}
+                      </span>
+
+                    </h4>
+
                   </div>
                 </div>
               </div>
