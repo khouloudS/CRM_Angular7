@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {EmbryoService} from '../../../Services/Embryo.service';
+import {QuoteService} from '../../../Services/quote.service';
 
 @Component({
   selector: 'app-Account',
@@ -7,12 +8,34 @@ import {EmbryoService} from '../../../Services/Embryo.service';
   styleUrls: ['./Account.component.scss']
 })
 export class AccountComponent implements OnInit {
-
-  constructor(public  embryoService : EmbryoService) { }
+  listUser: any;
+  ID :number;
+  Adresse :string;
+  CIN:number;
+  DateBirth:string;
+  Email:string;
+  Nom: string;
+  Password: string;
+  Prenom: string;
+  Username: string;
+  Operateur: string;
+  birth: string;
+  constructor(public  embryoService : EmbryoService, public  _quoteService: QuoteService) { }
 
   item : any;
   ngOnInit() {
     this.item = JSON.parse(localStorage.getItem(this.embryoService.currentUser));
+    this._quoteService.loginUser(this.item).subscribe(data => {
+      for(let i of this.listUser = data) {
+        console.log(this.listUser[0]['id']);
+        this.Email = this.listUser[0]['email'];
+        this.Nom = this.listUser[0]['nom'];
+        this.Prenom = this.listUser[0]['prenom'];
+        this.Adresse = this.listUser[0]['adresse'];
+        this.CIN = this.listUser[0]['cin'];
+        this.birth = this.listUser[0]['dateBirth'];
+        console.log( this.Prenom );
+      }});
   }
 
 }
