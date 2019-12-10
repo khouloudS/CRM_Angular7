@@ -10,6 +10,7 @@ import {postUserModel} from '../Model/User';
 import {QuoteStatistics} from '../Model/QuoteStatistics';
 import {ProductsModule} from '../Pages/Products/Products.module';
 import {postCoupon} from '../Model/Coupon';
+import {productQuantityModel} from '../Model/ProductQuatity';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class QuoteService {
   urlProductByQute = 'http://localhost:9080/CRM_PI-web/rest/quote';
   urlPostInvoice = 'http://localhost:9080/CRM_PI-web/rest/invoice/';
   urlPayment = 'http://localhost:9080/CRM_PI-web/rest/invoice/payeInvoice/';
-  urlNumberProduct = 'http://localhost:9080/CRM_PI-web/rest/quote/countNumberQuoteGeneratedToInvoice';
+  urlNumberProduct = 'http://localhost:9080/CRM_PI-web/rest/quote/findAllProductByQuoteAndNumber';
   urlLogin = 'http://localhost:9080/CRM_PI-web/rest/quote/login';
   urlLoginUser = 'http://localhost:9080/CRM_PI-web/rest/quote/loginClient';
   urlfindProducts = 'http://localhost:9080/CRM_PI-web/rest/quote/findAllProduct';
@@ -34,6 +35,7 @@ export class QuoteService {
   urlAddCoupon = 'http://localhost:9080/CRM_PI-web/rest/quote/addCoupon';
   urlGetCoupon = 'http://localhost:9080/CRM_PI-web/rest/quote/getCoupon';
   urlGetAllCoupon = 'http://localhost:9080/CRM_PI-web/rest/quote/getCoupon';
+  urlDeleteCoup = 'http://localhost:9080/CRM_PI-web/rest/quote/deleteCoupon';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -143,13 +145,13 @@ export class QuoteService {
       responseType: 'json'
     });
   }
-  public  findAllProductByQuoteAndNumber(idProduit: number, reference: string): Observable<number> {
+  public  findAllProductByQuoteAndNumber(idProduit: number, reference: string): Observable<productQuantityModel[]> {
     let httpHeaders = new HttpHeaders()
       .set('Accept', 'application/json');
     let httpParams = new HttpParams()
       .set('reference', reference);
     console.log(httpParams.toString());
-    return this.http.get<number>(this.urlNumberProduct + '/' + idProduit + '/' + reference, {
+    return this.http.get<productQuantityModel[]>(this.urlNumberProduct + '/' + idProduit + '/' + reference, {
       headers: httpHeaders,
       responseType: 'json'
     });
@@ -180,4 +182,14 @@ export class QuoteService {
       responseType: 'json'
     });
   }
+
+  public  deleteCoupon(coupon: number): Observable<postCoupon[]> {
+    let httpHeaders = new HttpHeaders()
+      .set('Accept', 'application/json');
+    return this.http.delete<postCoupon[]>(this.urlDeleteCoup + '/' + coupon , {
+      headers: httpHeaders,
+      responseType: 'json'
+    });
+  }
+
 }
