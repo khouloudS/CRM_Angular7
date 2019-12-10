@@ -10,6 +10,7 @@ import {Quote} from '@angular/compiler';
 import {AngularFireDatabase, AngularFireObject} from '@angular/fire/database';
 import {LoadingBarService} from '@ngx-loading-bar/core';
 import {postProduct} from '../../../Model/Product';
+import {productQuantityModel} from '../../../Model/ProductQuatity';
 declare var $: any;
 @Component({
   selector: 'app-quote-history',
@@ -25,8 +26,8 @@ export class QuoteHistoryComponent implements OnInit {
   quantity: [];
   object : any;
   parentRouteParams: string;
-
-  quanti : number;
+listQuantity: productQuantityModel;
+  quanti : any;
   quantityArray  : number[] = [1,2,3,4,5,6,7,8,9,10];
   popupResponse  : any;
   listUser: any;
@@ -84,8 +85,10 @@ export class QuoteHistoryComponent implements OnInit {
     // this._quoteService.getProductByQuote(this.parentRouteParams).subscribe(data => console.log(this.productList = data) );
     this._quoteService.getProductByQuote(this.parentRouteParams).subscribe(data => {
       for (let i of this.productList = data){
-       // this._quoteService.findAllProductByQuoteAndNumber(i.id, this.parentRouteParams).subscribe(resp => console.log(this.quanti = resp) )
-        console.log(this.quanti );
+        this._quoteService.findAllProductByQuoteAndNumber(i.id, this.parentRouteParams).subscribe(resp => console.warn(this.quanti = resp));
+        this.listQuantity = new productQuantityModel();
+        this.listQuantity.quantityPro = this.quanti ;
+      //  console.log(this.quanti );
         this.db.object("products").valueChanges().subscribe(res =>  {
           this.embryoService.setCartItemDefaultValue(res['gadgets'][i.id-10]);
         } );

@@ -6,6 +6,7 @@ import {EmbryoService} from '../../../Services/Embryo.service';
 import {FormBuilder} from '@angular/forms';
 import {LoadingBarService} from '@ngx-loading-bar/core';
 import {AngularFireDatabase} from '@angular/fire/database';
+import {productQuantityModel} from '../../../Model/ProductQuatity';
 
 @Component({
   selector: 'app-history-details-quote-admin',
@@ -22,10 +23,10 @@ export class HistoryDetailsQuoteAdminComponent implements OnInit {
   object : any;
   parentRouteParams: string;
 
-  quanti : number;
+  quanti : any;
   quantityArray  : number[] = [1,2,3,4,5,6,7,8,9,10];
   popupResponse  : any;
-
+  listQuantity: productQuantityModel;
   listUser: any;
   ID :number;
   Adresse :string;
@@ -77,20 +78,20 @@ export class HistoryDetailsQuoteAdminComponent implements OnInit {
     let item = JSON.parse(localStorage.getItem(this.embryoService.currentUser));
     this._quoteService.getQuoteByClient(item).subscribe(data => this.quote = data);
 
+
     // this._quoteService.getProductByQuote(this.parentRouteParams).subscribe(data => console.log(this.productList = data) );
     this._quoteService.getProductByQuote(this.parentRouteParams).subscribe(data => {
-      for (let i of this.productList = data) {
-
-        // this._quoteService.findAllProductByQuoteAndNumber(i.id, this.parentRouteParams).subscribe(resp => console.log(this.quanti = resp) )
-        console.log(this.quanti);
-        this.db.object("products").valueChanges().subscribe(res => {
-          this.embryoService.setCartItemDefaultValue(res['gadgets'][i.id - 10]);
-        });
+      for (let i of this.productList = data){
+        this._quoteService.findAllProductByQuoteAndNumber(i.id, this.parentRouteParams).subscribe(resp => console.warn(this.quanti = resp));
+        this.listQuantity = new productQuantityModel();
+        this.listQuantity.quantityPro = this.quanti ;
+        //  console.log(this.quanti );
+        this.db.object("products").valueChanges().subscribe(res =>  {
+          this.embryoService.setCartItemDefaultValue(res['gadgets'][i.id-10]);
+        } );
 
       }
     });
-
-
 
   }
 

@@ -30,7 +30,7 @@ export class CartComponent implements OnInit, AfterViewChecked {
   }
 
   public removeProduct(value:any) {
-    let message = "Are you sure you want to delete this product?";
+    let message = "Voulez-vous vraiment supprimer ce produit?";
     this.embryoService.confirmationPopup(message).
     subscribe(res => {this.popupResponse = res},
       err => console.log(err),

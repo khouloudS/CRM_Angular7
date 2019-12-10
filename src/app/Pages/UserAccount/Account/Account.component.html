@@ -23,27 +23,24 @@
                   <span><i class="material-icons">
                       account_circle
                     </i> Profile</span> </a></mat-list-item>
-              <mat-list-item role="listitem"  *ngIf="item != 22"> <a [routerLink]="['/account/address']" routerLinkActive="tab-active"><i
-                    class="material-icons">
-                    location_on
-                  </i> <span>Addresses</span> </a></mat-list-item>
+
               <mat-list-item role="listitem"  *ngIf="item != 22"> <a [routerLink]="['/account/cards']" routerLinkActive="tab-active"><i
                     class="material-icons">
                     credit_card
                   </i> <span>Saved Cards</span> </a></mat-list-item>
               <mat-list-item role="listitem"  *ngIf="item == 22"> <a [routerLink]="['/account/invoice-history']" routerLinkActive="tab-active"><i
                 class="material-icons">
-                    invoice
-              </i> <span> Mes factures</span> </a></mat-list-item>
+                history
+              </i> <span> Historique client</span> </a></mat-list-item>
               <mat-list-item role="listitem"  *ngIf="item == 22"> <a [routerLink]="['/account/dashbord-admin']" routerLinkActive="tab-active"><i
                 class="material-icons">
-                invoice
+                dashboard
               </i> <span>dashboard</span> </a></mat-list-item>
 
 
               <mat-list-item role="listitem"  *ngIf="item == 22"> <a [routerLink]="['/account/show-all-coupon-admin']" routerLinkActive="tab-active"><i
                 class="material-icons">
-                invoice
+                credit_card
               </i> <span>Coupon</span> </a></mat-list-item>
 
             </mat-list>

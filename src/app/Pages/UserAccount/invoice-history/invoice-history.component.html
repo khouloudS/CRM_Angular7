@@ -24,7 +24,7 @@
         <span  *ngIf="element.generatedToInvoice == 1 " > {{genereted}}</span>
         <span *ngIf="element.generatedToInvoice == 0 "> {{nongenereted}}</span>
       </td>
-      <td> <a href="javascript:void" class="accent-color"  [routerLink]="['/account/quote-history', element.reference]">   <i class="material-icons">
+      <td> <a href="javascript:void" class="accent-color"  [routerLink]="['/account/history-details-quote-admin', element.reference]">   <i class="material-icons">
         remove_red_eye
       </i></a>
       </td>

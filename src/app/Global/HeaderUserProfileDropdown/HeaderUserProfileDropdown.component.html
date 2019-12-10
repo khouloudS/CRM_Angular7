@@ -6,5 +6,5 @@
   </button>
   <button mat-menu-item [routerLink]="['/account/profile']"><i class="material-icons mr-1">settings</i><span>Account</span></button>
   <button mat-menu-item [routerLink]="['/account/profile']"> <i class="material-icons mr-1">local_post_office</i> <span>Messages</span></button>
-  <button mat-menu-item [routerLink]="['/session/signin']"><i class="material-icons mr-1">power_settings_new</i><span>Logout</span></button>
+  <button mat-menu-item (click)="logout()"><i class="material-icons mr-1">power_settings_new</i><span>Logout</span></button>
 </mat-menu>
