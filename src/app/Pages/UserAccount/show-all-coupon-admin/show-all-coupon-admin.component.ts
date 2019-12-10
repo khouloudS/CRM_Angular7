@@ -15,12 +15,13 @@ export class ShowAllCouponAdminComponent implements OnInit {
   public searchText : string;
   deliveryDate: any;
   public quote :any;
+  coupDeleted : any;
   displayedColumns: string[] = [ 'orderid', 'name', 'price', 'status','position','action'];
   genereted = 'généré';
   nongenereted = 'non généré';
   ratingInfoList: { book: postData; rating: number }[] = [];
   expiredDate = [];
-
+  popupResponse  : any;
   constructor(private _quoteService: QuoteService,  public router: Router, public embryoService: EmbryoService,
               private formGroup : FormBuilder) {
     localStorage.removeItem("cart_item");
@@ -54,4 +55,18 @@ export class ShowAllCouponAdminComponent implements OnInit {
     this.router.navigate(['/account/quote-history']);
   }
 
+  removeCoupon(id: any) {
+    let message = "Voulez-vous vraiment supprimer ce coupon ?";
+    this.embryoService.confirmationPopup(message).
+    subscribe(res => {this.popupResponse = res},
+      err => console.log(err),
+      ()  => this.getPopupResponse(this.popupResponse, id)
+    );
+
+  }
+  public getPopupResponse(response, value) {
+    if(response){
+      this._quoteService.deleteCoupon(value).subscribe(data => {this.coupDeleted = data});
+    }
+  }
 }

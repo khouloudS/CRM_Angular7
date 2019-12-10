@@ -2,7 +2,7 @@
   <h4 class="mb-3">Mes Coupons</h4>
   <button mat-raised-button color="accent" [routerLink]="['/account/coupon-admin']">Ajouter coupon</button>
   <input [(ngModel)]="searchText" placeholder="chercher reference" class="advancedSearchTextbox">
-  <table class="table">
+  <table #grid class="table">
     <thead>
     <tr>
       <th scope="col">#</th>
@@ -21,8 +21,8 @@
       <td  > {{element.dateFin| date:'MMMM d, y'}}</td>
 
       <td  >{{element.reduction}} </td>
-      <td> <a href="javascript:void" class="accent-color"  [routerLink]="['/account/quote-history', element.reference]">   <i class="material-icons">
-        remove_red_eye
+      <td>  <a href="javascript:void(0)" class="accent-color remove-cart" (click)="removeCoupon(element.id)" ><i class="material-icons">
+        close
       </i></a>
       </td>
     </tr>

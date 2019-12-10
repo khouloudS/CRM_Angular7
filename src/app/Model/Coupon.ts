@@ -1,4 +1,5 @@
 export class postCoupon{
+  id:number;
   ref: string;
   reduction:number;
   seuil:number;
