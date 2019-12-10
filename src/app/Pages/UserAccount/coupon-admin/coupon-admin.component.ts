@@ -111,9 +111,7 @@ export class CouponAdminComponent implements OnInit {
     this._quoteService.addCoupon(this.postCoup).subscribe((res: respCompon) => {
         this.resCoup = res;
       });
-
-
-
+    this.router.navigate(['/account/show-all-coupon-admin']);
     }
 
 

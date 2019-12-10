@@ -42,7 +42,7 @@
 
               <div fxFlex.xs="50" fxFlex.sm="20" fxFlex.md="20" fxFlex.lg="20" fxFlex.xl="20">
                 <mat-form-field class="w-100" >
-                  <input  matInput type="number"  #quantity  [value]="quanti" min="1" max="10" placeholder="Quantity">
+                  <input  matInput type="number"  #quantity  [value]=" getQuantityValue(product)" min="1" max="10" placeholder="Quantité">
                 </mat-form-field>
               </div>
               <div fxFlex.xs="50" fxFlex.sm="40" fxFlex.md="30" fxFlex.lg="20" fxFlex.xl="20">

@@ -87,6 +87,8 @@ export class FinalReceiptComponent implements OnInit {
    public goToHome() {
       this.embryoService.removeBuyProducts();
       this.router.navigate(['/']);
+     localStorage.setItem(this.embryoService.totalInvoice, null);
+
    }
 
    public printDiv()
@@ -97,5 +99,6 @@ export class FinalReceiptComponent implements OnInit {
       window.print();
       printContents.remove();
       originalContents.show();
+     localStorage.setItem(this.embryoService.totalInvoice, null);
    }
 }

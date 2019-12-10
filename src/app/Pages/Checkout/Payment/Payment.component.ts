@@ -118,20 +118,20 @@ export class PaymentComponent implements OnInit, AfterViewInit{
          this.CIN = this.listUser[0]['cin'];
          this.birth = this.listUser[0]['dateBirth'];
          console.log( this.Prenom );
-       }});
+
 
      this.parentRouteParams = this.route.snapshot.paramMap.get('reference');
       this.paymentFormOne = this.formGroup.group({
          user_details       : this.formGroup.group({
-            first_name         : ['', [Validators.required]],
-            last_name          : ['', [Validators.required]],
+            first_name         : [ this.Prenom, [Validators.required]],
+            last_name          : [ this.Nom, [Validators.required]],
             street_name_number : ['', [Validators.required]],
             apt                : ['', [Validators.required]],
             zip_code           : ['', [Validators.required]],
-            city_state         : ['', [Validators.required]],
-            country            : ['', [Validators.required]],
+            city_state         : [ this.Adresse, [Validators.required]],
+            country            : ['Tunisie', [Validators.required]],
             mobile             : ['', [Validators.required]],
-            email              : ['', [Validators.required, Validators.pattern(this.emailPattern)]],
+            email              : [ this.Email, [Validators.required, Validators.pattern(this.emailPattern)]],
             share_email        : ['', [Validators.pattern(this.emailPattern)]],
          }),
          offers             : this.formGroup.group({
@@ -148,7 +148,7 @@ export class PaymentComponent implements OnInit, AfterViewInit{
             bank_card_value : [null]
          })
       });
-
+       }});
       this.totalFacture =  this.getCartProducts();
      this.totalWithoutCoupon =  this.getCartProducts();
       console.warn('somme initial ' + this.totalFacture);
@@ -201,7 +201,10 @@ export class PaymentComponent implements OnInit, AfterViewInit{
     let total = 0 ;
      this._quoteService.getAllCoupon().subscribe(data => {
        for(let v of this.coupnList = data){
-        if (v.ref == code)
+         let limitDate = new Date(v.dateFin);
+         let dateDeb = new Date(v.dateDebute);
+         console.warn(limitDate +'------'+ sysDate);
+        if (v.ref == code && (limitDate >= sysDate ) )
         {
           this.find = true;
           if(this.embryoService.localStorageCartProducts && this.embryoService.localStorageCartProducts.length>0) {
