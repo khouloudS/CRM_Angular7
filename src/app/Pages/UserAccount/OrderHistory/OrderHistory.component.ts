@@ -51,6 +51,7 @@ export class OrderHistoryComponent implements OnInit {
            'idRef': this.quote.reference,
            'dateExpired': this.deliveryDate
          });
+
        }
      });
    }

@@ -15,7 +15,7 @@
   </thead>
   <tbody *ngFor="let element of quote | grdFilter: {reference: searchText}; let i=index;">
   <tr>
-    <th scope="row">1</th>
+    <th scope="row">{{i}}</th>
     <td [ngClass]="{'make-gold':element.expired && element.generatedToInvoice == 0}" > {{element.reference}} </td>
     <td [ngClass]="{'make-gold':element.expired && element.generatedToInvoice == 0}" > {{element.dateQuote| date:'MMMM d, y'}}</td>
     <td [ngClass]="{'make-gold':element.expired && element.generatedToInvoice == 0}" >{{element.duration}} </td>
